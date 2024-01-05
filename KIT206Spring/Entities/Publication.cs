@@ -1,33 +1,38 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206Spring.Spring_RAP.Entities
+namespace KIT206Spring.Entities
 {
     public class Publication
     {
-        public string DOI { get; set; }
-        public string Title { get; set; }
-        public string Authors { get; set; }
-        public RankingType Ranking { get; set; }
-        public PublicationType Type { get; set; }
-        public string CiteAs { get; set; }
-        public DateTime AvailabilityDate { get; set; }
+        //                        Publication pub = new Publication(title, doi, authors, cite_as, available, type, ranking);
 
-        // Constructors
-        public Publication(string doi, string title, string authors, string ranking, string type, string citeAs, DateTime availabilityDate)
+        public string Title { get; set; }
+        public string DOI { get; set; }
+
+        public string Authors { get; set; }
+        public string CiteAs { get; set; }
+        public RankingType Ranking { get; set; }
+        public DateTime AvailabilityDate { get; set; }
+        public PublicationType Type { get; set; }
+
+
+        // Constructor
+        public Publication(string title, string doi, string authors, string citeAs, DateTime availabilityDate, string type, string ranking)
         {
-            DOI = doi;
+            //PublicationYear = publicationYear;
             Title = title;
+            DOI = doi;
             Authors = authors;
-            Ranking = (RankingType)Enum.Parse(typeof(RankingType), ranking);
-            typeCalc(type);
             CiteAs = citeAs;
             AvailabilityDate = availabilityDate;
+            //PageCount = pageCount;
+            typeCalc(type);
+            Ranking = (RankingType)Enum.Parse(typeof(RankingType), ranking);
+
 
         }
 
@@ -37,22 +42,20 @@ namespace KIT206Spring.Spring_RAP.Entities
             {
                 Type = PublicationType.Conference;
             }
-            else if (st.Equals("Journal"))
+            else
             {
                 Type = PublicationType.Journal;
             }
-            else
-            {
-                Type = PublicationType.Other;
-            }
+
         }
+
     }
+
 
     public enum PublicationType
     {
         Conference,
-        Journal,
-        Other
+        Journal
     }
 
     public enum RankingType
@@ -62,4 +65,5 @@ namespace KIT206Spring.Spring_RAP.Entities
         Q3,
         Q4
     }
+
 }

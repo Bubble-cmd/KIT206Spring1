@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206Spring.Spring_RAP.Entities
+namespace KIT206Spring.Entities
 {
     public enum Level
     {

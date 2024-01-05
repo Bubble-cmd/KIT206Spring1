@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using KIT206Spring.Database;
 using KIT206Spring.Entities;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
-namespace KIT206Spring.Spring_RAP.Controllers
+namespace KIT206Spring.Controllers
 {
     internal class PublicationsControl
     {

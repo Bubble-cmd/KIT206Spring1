@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KIT206Spring.Spring_RAP.Entities;
-using KIT206Spring.Spring_RAP.Controllers;
+using KIT206Spring.Entities;
+using KIT206Spring.Controllers;
 
-namespace KIT206Spring.Spring_RAP.View
+namespace KIT206Spring.View
 {
     internal class PerformaceDetailsView
     {

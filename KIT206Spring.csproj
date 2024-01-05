@@ -7,4 +7,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\KIT206 old\Group22RAP\RAP\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

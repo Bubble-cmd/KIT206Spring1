@@ -10,7 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using KIT206Spring.Entities;
 
-namespace KIT206Spring.Spring_RAP.DataSource
+namespace KIT206Spring.DataSource
 {
     public static class XMLAdapter
     {

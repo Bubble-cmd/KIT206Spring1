@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206Spring.Spring_RAP.Entities
+namespace KIT206Spring.Entities
 {
     public class Position
     {
@@ -12,7 +12,7 @@ namespace KIT206Spring.Spring_RAP.Entities
         public DateTime? EndDate { get; set; } // The end date is nullable for ongoing positions
         public Level Level { get; set; }
 
-        public Position(DateTime startDate, DateTime endDate, string level)
+        public Position(DateTime startDate, DateTime? endDate, string level)
         {
             StartDate = startDate;
             EndDate = endDate;

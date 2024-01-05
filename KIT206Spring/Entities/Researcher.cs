@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206Spring.Spring_RAP.Entities
+namespace KIT206Spring.Entities
 {
     public class Researcher
     {
@@ -23,10 +23,10 @@ namespace KIT206Spring.Spring_RAP.Entities
         public DateTime CommencedWithInstitution { get; private set; }
         public Level PositionLevel { get; set; }
         public string Q1Percentage { get; private set; }
-        public List<Publication> Pubs { get; set }
+        public List<Publication> Pubs { get; set; }
         public JobTitle Job_Title { get; set; }
         public double ExpectedNoPubs { get; set; }
-        public double Tenure { get; private set }
+        public double Tenure { get; private set; }
 
         // Constructors
         public Researcher(int id, string type, string firstName, string lastName, String title, string schoolUnit, string campus, string email, string photoURL, DateTime utas_start, DateTime current_start,
@@ -41,7 +41,6 @@ namespace KIT206Spring.Spring_RAP.Entities
             Email = email;
             PhotoURL = photoURL;
             Pubs = new List<Publication>();
-            //Camp = (Campus)Enum.Parse(typeof(Campus), type); (fix)
             CommencedWithInstitution = utas_start;
             CommenceCurrentPosition = current_start;
             PositionLevel = (Level)Enum.Parse(typeof(Level), lvl);
@@ -69,7 +68,7 @@ namespace KIT206Spring.Spring_RAP.Entities
                     ExpectedNoPubs = 2;
                     break;
                 case Level.D:
-                    Job_Title = CurrentJobTitle.AssociateProfessor;
+                    Job_Title = JobTitle.AssociateProfessor;
                     ExpectedNoPubs = 3.2;
                     break;
                 case Level.E:

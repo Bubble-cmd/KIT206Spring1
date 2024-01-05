@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KIT206Spring.Spring_RAP.Entities;
+using KIT206Spring.Entities;
 
-namespace KIT206Spring.Spring_RAP.View
+namespace KIT206Spring.View
 {
     internal class PublicationView
     {

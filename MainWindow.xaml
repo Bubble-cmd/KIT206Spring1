@@ -4,9 +4,127 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KIT206Spring"
+        xmlns:Entities="clr-namespace:KIT206Spring.Entities"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+	<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="73"/>
+			<RowDefinition Height="361*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="240"/>
+			<ColumnDefinition Width="300*" MinWidth="300"/>
+			<ColumnDefinition Width="275*"/>
+		</Grid.ColumnDefinitions>
+		<ListView Name="researcherListView" Margin="10,8,0,39" SelectionChanged= "researcherListView_SelectionChanged" Grid.Row="1" >
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Last Name">
+						<GridViewColumn.DisplayMemberBinding>
+							<MultiBinding StringFormat="{}{0},">
+								<Binding Path="LastName" />
+							</MultiBinding>
+						</GridViewColumn.DisplayMemberBinding>
+					</GridViewColumn>
+					<GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+					<GridViewColumn Header="Title">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Title, StringFormat='({0})'}"/>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Level" DisplayMemberBinding="{Binding PositionLevel}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		<!-- filter by level combo box-->
+		<Image Source="{Binding ImageData}" Margin="20,46,20,116" Grid.Row="1" />
 
-    </Grid>
+		<ComboBox Name="LevelFilterComboBox" SelectionChanged="LevelFilterComboBox_SelectionChanged" Margin="75,44,10,0" VerticalAlignment="Top" Height="22">
+			<ComboBoxItem Content="Student" />
+			<ComboBoxItem Content="A" />
+			<ComboBoxItem Content="B" />
+			<ComboBoxItem Content="C" />
+			<ComboBoxItem Content="D" />
+			<ComboBoxItem Content="E" />
+			<ComboBoxItem Content="All levels" />
+		</ComboBox>
+
+
+		<ListView Name="researcherDetailsView" Grid.Column="1" VerticalAlignment="Top" Height="356" Grid.RowSpan="2">
+			<StackPanel>
+				<TextBlock Name="name" Text="Name: " FontSize="10" Margin="2"/>
+				<TextBlock Name="resTitle" Text="Title: " FontSize="10" Margin="2"/>
+				<TextBlock Name="unit" Text="School/Unit: " FontSize="10" Margin="2"/>
+				<TextBlock Name="campus" Text="Campus: " FontSize="10" Margin="2"/>
+				<TextBlock Name="email" Text="Email: " FontSize="10" Margin="2"/>
+				<TextBlock Name="job" Text="Current job:" FontSize="10" Margin="2"/>
+				<TextBlock Name="commencedInt" Text="Commenced with institution: " FontSize="10" Margin="2" />
+				<TextBlock Name="commencedCurr" Text="Commenced current position: " FontSize="10" Margin="2"/>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Name="tenure" Text="Tenure: " FontSize="10" Margin="2"/>
+					<TextBlock Text="Years " FontSize="10" Margin="2"/>
+				</StackPanel>
+				<TextBlock Name="supervisions" Text="Supervisions" FontSize="10" Margin="2"/>
+				<TextBlock Name="degree" Text="Degree: " FontSize="10" Margin="2"/>
+				<TextBlock Name="supervisor" Text="Supervisor: " FontSize="10" Margin="2"/>
+				<TextBlock Name="publi" Text="Publications: " FontSize="10" Margin="2"/>
+			</StackPanel>
+		</ListView>
+
+		<!-- Publications list -->
+
+		<TextBox x:Name="FirstNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="65,191,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Height="18"/>
+		<TextBox x:Name="SecondNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10,191,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Height="18"/>
+
+		<Button Grid.Column="1" Content="filter by year" HorizontalAlignment="Left" Margin="10,214,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Submit_Button_Click" Height="20" Width="70"/>
+		<Button Grid.Column="1" Content="Copy Email" HorizontalAlignment="Left" Grid.Row="1"  Height="15" Width="50" FontSize="9" Margin="170,0,0,0" VerticalAlignment="Top" Click="Button_Copy_Email_Click"/>
+		<ListView Name="PublicationListView" SelectionChanged= "PublicationListView_SelectionChanged" Grid.Column="1" Grid.Row="1" Margin="0,253,0,0">
+			<ListView.Resources>
+				<DataTemplate x:Key="HeadTemplate">
+					<TextBlock HorizontalAlignment="Left" Text="{Binding}"/>
+				</DataTemplate>
+				<Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+					<Setter Property="HorizontalContentAlignment" Value="Left"/>
+				</Style>
+			</ListView.Resources>
+			<ListView.View>
+				<GridView>
+					<GridViewColumn>
+						<GridViewColumn.Header>
+							<GridViewColumnHeader Content="Publication Date" Click="PublicationDateColumnHeader_Click" Width="100"/>
+						</GridViewColumn.Header>
+						<GridViewColumn.DisplayMemberBinding>
+							<Binding Path="AvailabilityDate" StringFormat="{}{0:MM/dd/yyyy}"/>
+						</GridViewColumn.DisplayMemberBinding>
+					</GridViewColumn>
+					<GridViewColumn Header="Publication Title" HeaderTemplate ="{StaticResource HeadTemplate}" HeaderContainerStyle="{StaticResource HeaderStyle}" DisplayMemberBinding="{Binding Title}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+		<ListView Name="pubsDetailsView" Grid.Column="2" VerticalAlignment="Top" Height="424" Grid.RowSpan="2">
+			<StackPanel>
+				<TextBlock Name="DOI" Text="DOI: " FontSize="10" Margin="2"/>
+				<TextBlock Name="pubTitle" Text="Publication Title: " FontSize="10" Margin="2"/>
+				<TextBlock Name="authors" Text="Authors: " FontSize="10" Margin="2"/>
+				<TextBlock Name="pubYear" Text="Publication Year: " FontSize="10" Margin="2"/>
+				<TextBlock Name="ranking" Text="Ranking: " FontSize="10" Margin="2"/>
+				<TextBlock Name="pubType" Text="Publication Type: " FontSize="10" Margin="2"/>
+				<TextBlock Name="citeAS" Text="Cite A: " FontSize="10" Margin="2"/>
+				<TextBlock Name="avaDate" Text="Availability Date: " FontSize="10" Margin="2"/>
+				<TextBlock Name="pubAge" Text="Age: " FontSize="10" Margin="2"/>
+			</StackPanel>
+		</ListView>
+
+		<Button x:Name="tempButton" Grid.Column="1" Content="Display Performance" HorizontalAlignment="Right" Margin="0,214,10,0" VerticalAlignment="Top" Click="tempButton_Click" Grid.Row="1" Height="20" Width="112"/>
+
+		<TextBox HorizontalAlignment="Left" Margin="15,44,0,0" TextWrapping="Wrap" Text="Show:" VerticalAlignment="Top" Width="55" Height="22"/>
+
+		<TextBox x:Name="SearchBox" Margin="15,5,5,0" KeyDown="SearchBox_KeyDown" Height="22" VerticalAlignment="Top" />
+		<Image Name="ResercherPhoto" Grid.Column="1" Margin="176,23,15,311" Grid.RowSpan="2" HorizontalAlignment="Right" MinWidth="10" MaxWidth="200" MinHeight="100" MaxHeight="250" VerticalAlignment="Top"/>
+		<Button Content="Generate Reports" HorizontalAlignment="Center" Margin="0,0,0,12" Grid.Row="1" Width="100" Click="Report_Button_Click" Height="20" VerticalAlignment="Bottom"/>
+	</Grid>
 </Window>
