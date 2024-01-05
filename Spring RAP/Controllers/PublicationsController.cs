@@ -28,16 +28,16 @@ namespace KIT206Spring.Spring_RAP.Controllers
             return orderedList;
         }
         // This function fetches and sorts a Researcher's Publications. If the Researcher has any Publications, it returns null.
-        public static List<Publication> FetchPublications(Researcher res)
+        public static List<Publication> FetchPublications(Researcher rs)
         {
-            if (res.Pubs.Count > 0) //ideally you would actually want to select the first publication by the Researcher if count more than 0 but for now it is null(empty) on display
+            if (rs.Pubs.Count > 0) //ideally you would actually want to select the first publication by the Researcher if count more than 0 but for now it is null(empty) on display
             {
                 return null;
             }
             else
             {
                 List<Publication> pubs = new List<Publication>();
-                pubs = DBAdapter.GetPubs(res);
+                pubs = DBAdapter.GetPubs(rs);
                 pubs = sort_list(pubs);
                 return pubs;
             }
