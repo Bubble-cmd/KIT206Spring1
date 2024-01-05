@@ -26,11 +26,9 @@ namespace KIT206Spring.Spring_RAP.Entities
         public List<Publication> Pubs { get; set }
         public JobTitle Job_Title { get; set; }
         public double ExpectedNoPubs { get; set; }
-        public double Tenure { get; private set } // Length of time in fractional years since the researcher's commencement in the institution
+        public double Tenure { get; private set }
 
         // Constructors
-
-        // iD to id, campHouse to campus, photURL to photoURL, curretn_start to current_status, lev to lvl
         public Researcher(int id, string type, string firstName, string lastName, String title, string schoolUnit, string campus, string email, string photoURL, DateTime utas_start, DateTime current_start,
             string lvl)
         {
@@ -87,8 +85,114 @@ namespace KIT206Spring.Spring_RAP.Entities
                     throw new ArgumentException("Level invalid"); // for invalid position
             }
         }
+        public static void CalcPositionInfo(Researcher researcher, List<Position> positions)
 
-        // add CalcPositionInfo, CalcEarliestPos, CalcTenure, CalcCommencedCurrentPosition, CalcPerformanceByPublication, AveragePublicationsPerYear, Q1PercentageCalc
-        // add enum ResearcherType, Campus, JobTitle
+        {
+            Console.WriteLine("\t\t\t\tthello in the funciton");
+            foreach (Position positiona in positions)
+            {
+                Console.WriteLine(positiona.StartDate);
+            }
+            CalcEarliestPos(researcher, positions);
+            CalcTenure(researcher, researcher.CommencedWithInstitution);
+
+        }
+        public static void CalcEarliestPos(Researcher researcher, List<Position> positions)
+        {
+            DateTime lowest = DateTime.Today;
+            foreach (Position position in positions)
+            {
+                if (position.StartDate < lowest)
+                {
+                    lowest = position.StartDate;
+                }
+            }
+            researcher.CommencedWithInstitution = lowest;
+        }
+        public static void CalcTenure(Researcher researcher, DateTime CommCurPos)
+        {
+
+            TimeSpan difference = DateTime.Now - CommCurPos;
+            double years = difference.TotalDays / 365.25;
+
+            researcher.Tenure = Math.Round(years, 2);
+        }
+
+        public static DateTime CalcComencedCurrentPos(Staff Sta)
+        {
+            foreach (Position pos in Sta.Positions)
+            {
+                if (pos.EndDate == null)
+                {
+                    return pos.StartDate;
+                }
+            }
+            return new DateTime(1, 1, 1);
+        }
+        public static double CalculatePerformanceByPublication(Researcher researcher)
+        {
+            int yearsSinceCommencement = DateTime.Now.Year - researcher.CommencedWithInstitution.Year;
+            Console.WriteLine("now is ... " + DateTime.Now.Year + "research commecned with insti year " + researcher.CommencedWithInstitution.Year);
+
+            Console.WriteLine("yearsSonceComm = " + yearsSinceCommencement);
+
+            int totalPublications = researcher.Pubs.Count;
+            Console.WriteLine("total Pubs " + researcher.Pubs.Count);
+            double performanceByPublication = (double)totalPublications / yearsSinceCommencement;
+            double perfByPub = Math.Floor(performanceByPublication);
+
+            return perfByPub;
+        }
+        public static double AveragePublicationsPerYear(Researcher Res)
+        {
+            DateTime currentDate = DateTime.Today;//get date
+
+            List<Publication> recentPublications = Res.Pubs
+                .Where(p => p.AvailabilityDate.Year >= currentDate.Year - 2)
+                .ToList();
+            int totalPublications = recentPublications.Count();//calc total number of publications
+
+            // Calculate the number of years in the recent publications
+            int years = 3;
+            double averagePublicationsPerYear = (double)totalPublications / years;            // Calc the average number of pub per year
+            Console.WriteLine(averagePublicationsPerYear);
+
+            return averagePublicationsPerYear;
+        }
+        public static void Q1PercentageCalc(Researcher researcher)
+        {
+            int q1Count = 0;
+
+            foreach (Publication publication in researcher.Pubs)
+            {
+                if (publication.Ranking == RankingType.Q1)
+                {
+                    q1Count++;
+                }
+            }
+            researcher.Q1Percentage = String.Format("{0:0.00}", (double)q1Count / researcher.Pubs.Count * 100) + "%";
+        }
+
+        public enum ResearcherType
+        {
+            Student,
+            Staff
+        }
+        public enum Campus
+        {
+            Hobart,
+            Launceston,
+            Cradle_Coast
+        }
+        public enum JobTitle
+        {
+            ResearchAssociate,
+            Lecturer,
+            AssistantProfessor,
+            AssociateProfessor,
+            Professor,
+            Student
+        }
+
     }
 }
