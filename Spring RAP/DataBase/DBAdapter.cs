@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using MySql.Data.MySqlClient;
-using KIT206Spring.Entities;
+using KIT206Spring.Spring_RAP.Entities
 using KIT206Spring.Spring_RAP.View
 
 namespace KIT206Spring.Spring_RAP.Database
@@ -74,8 +74,8 @@ namespace KIT206Spring.Spring_RAP.Database
             return GetPublications(rs, DOIS);//returns a list of Publication objects
         }
         /*
-        retrieves the details of publications associated with a specific researcher and a list of DOIs from the database. 
-        It iterates over each DOI in the provided list, executing an SQL query to fetch publication details for each DOI from the database.
+         * retrieves the details of publications associated with a specific researcher and a list of DOIs from the database. 
+         * It iterates over each DOI in the provided list, executing an SQL query to fetch publication details for each DOI from the database.
         */
         public static List<Publication> GetPublications(Researcher Res, List<string> TheDOIS)
         {
