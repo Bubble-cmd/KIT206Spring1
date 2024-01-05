@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using MySql.Data.MySqlClient;
-using KIT206Spring.Spring_RAP.Entities
-using KIT206Spring.Spring_RAP.View
+using KIT206Spring.Spring_RAP.Entities;
+using KIT206Spring.Spring_RAP.View;
 
 namespace KIT206Spring.Spring_RAP.Database
 {

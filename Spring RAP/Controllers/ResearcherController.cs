@@ -11,11 +11,11 @@ using System.Runtime.Versioning;
 using System.CodeDom.Compiler;
 using System.Windows.Navigation;
 using static System.Windows.Forms.AxHost;
-using KIT206Spring.Spring_RAP.DataBase
-using KIT206Spring.Spring_RAP.DataSource
-using KIT206Spring.Spring_RAP.Entities
-using KIT206Spring.Spring_RAP.View
-using KIT206Spring.Spring_RAP
+using KIT206Spring.Spring_RAP.DataBase;
+using KIT206Spring.Spring_RAP.DataSource;
+using KIT206Spring.Spring_RAP.Entities;
+using KIT206Spring.Spring_RAP.View;
+using KIT206Spring.Spring_RAP;
 
 namespace KIT206Spring.Spring_RAP.Controllers
 {
