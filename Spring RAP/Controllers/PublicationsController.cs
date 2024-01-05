@@ -7,7 +7,7 @@ using KIT206Spring.Database;
 using KIT206Spring.Entities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
-namespace Controllers
+namespace KIT206Spring.Spring_RAP.Controllers
 {
     internal class PublicationsControl
     {
