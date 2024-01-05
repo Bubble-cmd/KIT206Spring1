@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 using KIT206Spring.Entities;
 using KIT206Spring.Spring_RAP.View
 
-namespace KIT206_RAP.DataBase
+namespace KIT206Spring.Spring_RAP.Database
 {
 
     class DBAdapter
