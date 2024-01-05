@@ -8,11 +8,12 @@ namespace KIT206Spring.Spring_RAP.Entities
 {
     public enum Level
     {
+        Student,
         A,
         B,
         C,
         D,
         E,
-        Student
+        All_levels
     }
 }

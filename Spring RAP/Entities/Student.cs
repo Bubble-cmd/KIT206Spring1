@@ -8,8 +8,7 @@ namespace KIT206Spring.Spring_RAP.Entities
 {
     public class Student : Researcher
     {
-        // Staff Supervisor
-        public int Supervisor { get; set; }
+        public int Supervisor { get; set; }   // This is also staff
         public string Degree { get; set; }
         public string SupervisorName { get; set; }
 

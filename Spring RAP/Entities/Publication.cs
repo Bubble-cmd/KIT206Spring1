@@ -21,7 +21,6 @@ namespace KIT206Spring.Spring_RAP.Entities
         // Constructors
         public Publication(string doi, string title, string authors, string ranking, string type, string citeAs, DateTime availabilityDate)
         {
-            //PublicationYear = publicationYear (fix)
             DOI = doi;
             Title = title;
             Authors = authors;
